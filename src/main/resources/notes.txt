@@ -1,1 +1,3 @@
 >>> VM Options ile active profile atama: -Dspring.profiles.active=dev
+
+>>> Spring projesini CMD' den calistirma: java -Dspring.profiles.active=dev -jar petclinic-0.0.1-SNAPSHOT.war
