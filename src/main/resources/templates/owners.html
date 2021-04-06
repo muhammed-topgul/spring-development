@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Fragments: home</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<table>
+    <thead>
+    <tr style="font-weight: bold" bgcolor="#90ee90">
+        <td>ID</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+    </tr>
+    </thead>
+    <th:block th:each="owner,iterStat:${owners}">
+        <tr th:bgcolor="${iterStat.odd} ? white : lightgray">
+            <td th:text="${owner.id}"/>
+            <td th:text="${owner.firstName}"/>
+            <td th:text="${owner.lastName}"/>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
