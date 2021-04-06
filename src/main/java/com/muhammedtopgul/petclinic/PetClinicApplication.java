@@ -4,7 +4,9 @@ import com.muhammedtopgul.petclinic.config.ApplicationProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
+@ServletComponentScan
 @SpringBootApplication
 @EnableConfigurationProperties(value = ApplicationProperties.class)
 public class PetClinicApplication {
