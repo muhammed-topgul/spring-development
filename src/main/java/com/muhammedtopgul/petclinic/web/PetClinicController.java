@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/mvc/owners")
 @RequiredArgsConstructor
 public class PetClinicController {
 
     private final PetClinicService petClinicService;
 
-    @RequestMapping("/owners")
+    @RequestMapping
     public ModelAndView getOwners() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("owners", petClinicService.findOwners());
