@@ -14,12 +14,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
 public class PetClinicServiceImpl implements PetClinicService {
 
@@ -31,16 +31,19 @@ public class PetClinicServiceImpl implements PetClinicService {
     @Qualifier("petJpaRepository")
     private PetRepository petRepository;
 
+    @Transactional(readOnly = true)
     @Override
     public List<OwnerEntity> findOwners() {
         return ownerRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<OwnerEntity> findOwners(String lastName) {
         return ownerRepository.findByLastName(lastName);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public OwnerEntity findOwner(Long id) throws OwnerNotFoundException {
         OwnerEntity entity = ownerRepository.findById(id);
