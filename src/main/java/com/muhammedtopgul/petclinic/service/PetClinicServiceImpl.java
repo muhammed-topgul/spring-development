@@ -24,11 +24,11 @@ import java.util.List;
 public class PetClinicServiceImpl implements PetClinicService {
 
     @Autowired
-    @Qualifier("ownerJdbcRepository")
+    @Qualifier("ownerJpaRepository")
     private OwnerRepository ownerRepository;
 
     @Autowired
-    @Qualifier("petJdbcRepository")
+    @Qualifier("petJpaRepository")
     private PetRepository petRepository;
 
     @Override
