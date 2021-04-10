@@ -1,5 +1,6 @@
 logging:
   level:
     org.springframework.web: info
+    org.springframework.jdbc.datasource: debug
   # proje logları dosyaya bastrıldı
   file: C:\users\muhammed.topgul\Desktop\petclinic.log

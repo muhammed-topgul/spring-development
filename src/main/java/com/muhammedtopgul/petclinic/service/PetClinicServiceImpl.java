@@ -9,30 +9,34 @@ package com.muhammedtopgul.petclinic.service;
 import com.muhammedtopgul.petclinic.entity.OwnerEntity;
 import com.muhammedtopgul.petclinic.exception.OwnerNotFoundException;
 import com.muhammedtopgul.petclinic.repository.OwnerRepository;
+import com.muhammedtopgul.petclinic.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PetClinicServiceImpl implements PetClinicService {
 
-    private final OwnerRepository ownerRepository;
+    private final OwnerRepository ownerJdbcRepository;
+    private final PetRepository petJdbcRepository;
 
     @Override
     public List<OwnerEntity> findOwners() {
-        return ownerRepository.findAll();
+        return ownerJdbcRepository.findAll();
     }
 
     @Override
     public List<OwnerEntity> findOwners(String lastName) {
-        return ownerRepository.findByLastName(lastName);
+        return ownerJdbcRepository.findByLastName(lastName);
     }
 
     @Override
     public OwnerEntity findOwner(Long id) throws OwnerNotFoundException {
-        OwnerEntity entity = ownerRepository.findById(id);
+        OwnerEntity entity = ownerJdbcRepository.findById(id);
 
         if (entity == null)
             throw new OwnerNotFoundException("Owner bulunamadı");
@@ -41,16 +45,17 @@ public class PetClinicServiceImpl implements PetClinicService {
 
     @Override
     public void createOwner(OwnerEntity entity) {
-        ownerRepository.create(entity);
+        ownerJdbcRepository.create(entity);
     }
 
     @Override
     public void updateOwner(OwnerEntity entity) {
-        ownerRepository.update(entity);
+        ownerJdbcRepository.update(entity);
     }
 
     @Override
     public void deleteOwner(Long id) {
-        ownerRepository.delete(id);
+        petJdbcRepository.deleteByOwnerId(id);
+        ownerJdbcRepository.delete(id);
     }
 }

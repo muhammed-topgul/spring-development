@@ -12,9 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 @UtilityClass
 public class DatabaseUtils {
-
-    // bu sinif JDBC islemlerini kolaylastirir
-    // JDBC islemleri sirasinda gerek duyulan, Connection, ResultSet, Statement gibi siniflari otomatik olusturur ve doner
     public static final RowMapper<OwnerEntity> rowMapper = (resultSet, i) -> {
         OwnerEntity ownerEntity = new OwnerEntity();
         ownerEntity.setId(resultSet.getLong("id"));
