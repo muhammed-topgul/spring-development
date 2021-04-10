@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -31,19 +32,21 @@ public class PetClinicServiceImpl implements PetClinicService {
     @Qualifier("petJpaRepository")
     private PetRepository petRepository;
 
-    @Transactional(readOnly = true)
+    // propagation = Propagation.SUPPORTS >>> Transaction varsa calistirilir yoksa transaction' siz devam eder
+    // readOnly >>> Transaction commit asamasinda FLUSH yapmasini engeller
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public List<OwnerEntity> findOwners() {
         return ownerRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public List<OwnerEntity> findOwners(String lastName) {
         return ownerRepository.findByLastName(lastName);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public OwnerEntity findOwner(Long id) throws OwnerNotFoundException {
         OwnerEntity entity = ownerRepository.findById(id);
