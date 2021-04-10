@@ -19,6 +19,9 @@
     Password: <input type="password" name="password">
     <br/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+    <br/>
+    Remember Me: <input type="checkbox" name="remember-me">
+    <br/>
     <input type="submit" value="Submit">
     <br/>
     <font color="red">
