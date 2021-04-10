@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("petJdbcRepository")
+@Repository(value = "petJdbcRepository")
 @RequiredArgsConstructor
 public class PetRepositoryJdbcImpl implements PetRepository {
 

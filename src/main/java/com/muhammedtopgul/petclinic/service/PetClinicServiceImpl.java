@@ -11,6 +11,8 @@ import com.muhammedtopgul.petclinic.exception.OwnerNotFoundException;
 import com.muhammedtopgul.petclinic.repository.OwnerRepository;
 import com.muhammedtopgul.petclinic.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,22 +23,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PetClinicServiceImpl implements PetClinicService {
 
-    private final OwnerRepository ownerJdbcRepository;
-    private final PetRepository petJdbcRepository;
+    @Autowired
+    @Qualifier("ownerJdbcRepository")
+    private OwnerRepository ownerRepository;
+
+    @Autowired
+    @Qualifier("petJdbcRepository")
+    private PetRepository petRepository;
 
     @Override
     public List<OwnerEntity> findOwners() {
-        return ownerJdbcRepository.findAll();
+        return ownerRepository.findAll();
     }
 
     @Override
     public List<OwnerEntity> findOwners(String lastName) {
-        return ownerJdbcRepository.findByLastName(lastName);
+        return ownerRepository.findByLastName(lastName);
     }
 
     @Override
     public OwnerEntity findOwner(Long id) throws OwnerNotFoundException {
-        OwnerEntity entity = ownerJdbcRepository.findById(id);
+        OwnerEntity entity = ownerRepository.findById(id);
 
         if (entity == null)
             throw new OwnerNotFoundException("Owner bulunamadı");
@@ -45,17 +52,17 @@ public class PetClinicServiceImpl implements PetClinicService {
 
     @Override
     public void createOwner(OwnerEntity entity) {
-        ownerJdbcRepository.create(entity);
+        ownerRepository.create(entity);
     }
 
     @Override
     public void updateOwner(OwnerEntity entity) {
-        ownerJdbcRepository.update(entity);
+        ownerRepository.update(entity);
     }
 
     @Override
     public void deleteOwner(Long id) {
-        petJdbcRepository.deleteByOwnerId(id);
-        ownerJdbcRepository.delete(id);
+        petRepository.deleteByOwnerId(id);
+        ownerRepository.delete(id);
     }
 }

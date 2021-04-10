@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("ownerJdbcRepository")
+@Repository(value = "ownerJdbcRepository")
 @RequiredArgsConstructor
 public class OwnerRepositoryJdbcImpl implements OwnerRepository {
 
