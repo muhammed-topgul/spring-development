@@ -88,7 +88,7 @@ public class PetClinicRestControllerTest {
         restTemplate.delete(URL + "/1");
         try {
             restTemplate.getForEntity(URL + "/1", OwnerEntity.class);
-            Assert.fail("Should have not retruned...");
+            Assert.fail("Should have not returned...");
         } catch (RestClientException exception) {
             System.out.println("Exception: " + exception.getMessage());
         }
