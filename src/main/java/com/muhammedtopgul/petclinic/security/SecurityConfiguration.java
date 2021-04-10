@@ -16,13 +16,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**/favicon.ico", "/css/**", "/js/**", "/images/**", "/webjars/**")
+                .antMatchers("/**/favicon.ico", "/css/**", "/js/**", "/images/**", "/webjars/**", "/mvc/login.html")
                 .permitAll();
 
         http.authorizeRequests()
                 .anyRequest()
                 .authenticated();
 
-        http.formLogin();
+        http.formLogin()
+                .loginPage("/mvc/login.html")
+                .loginProcessingUrl("/login")
+                .failureUrl("/mvc/login.html?loginFailed=true");
     }
 }
