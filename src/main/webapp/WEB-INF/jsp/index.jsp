@@ -8,6 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-Index Page
+<h1>Index Page</h1>
+<form action="/logout" method="post">
+    <input type="submit" value="Logout">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+</form>
 </body>
 </html>

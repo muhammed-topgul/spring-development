@@ -14,13 +14,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/mvc/owners")
+@RequestMapping("/mvc")
 @RequiredArgsConstructor
 public class PetClinicController {
 
     private final PetClinicService petClinicService;
 
-    @RequestMapping
+    @RequestMapping(value = {"/", "/index.html"})
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @RequestMapping("/owners")
     public ModelAndView getOwners() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("owners", petClinicService.findOwners());
