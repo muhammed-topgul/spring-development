@@ -18,21 +18,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PetClinicServiceImpl implements PetClinicService {
 
-    private final OwnerRepository repository;
+    private final OwnerRepository ownerRepository;
 
     @Override
     public List<OwnerEntity> findOwners() {
-        return repository.findAll();
+        return ownerRepository.findAll();
     }
 
     @Override
     public List<OwnerEntity> findOwners(String lastName) {
-        return repository.findByLastName(lastName);
+        return ownerRepository.findByLastName(lastName);
     }
 
     @Override
     public OwnerEntity findOwner(Long id) throws OwnerNotFoundException {
-        OwnerEntity entity = repository.findById(id);
+        OwnerEntity entity = ownerRepository.findById(id);
 
         if (entity == null)
             throw new OwnerNotFoundException("Owner bulunamadı");
@@ -41,16 +41,16 @@ public class PetClinicServiceImpl implements PetClinicService {
 
     @Override
     public void createOwner(OwnerEntity entity) {
-        repository.create(entity);
+        ownerRepository.create(entity);
     }
 
     @Override
     public void updateOwner(OwnerEntity entity) {
-        repository.update(entity);
+        ownerRepository.update(entity);
     }
 
     @Override
     public void deleteOwner(Long id) {
-        repository.delete(id);
+        ownerRepository.delete(id);
     }
 }
