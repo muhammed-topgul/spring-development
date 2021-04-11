@@ -12,14 +12,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "t_owner")
-@XmlRootElement
 @Getter
 @Setter
 @ToString(of = {"id", "firstName", "lastName"})
@@ -37,7 +34,6 @@ public class OwnerEntity {
     private String lastName;
 
     //
-    @XmlTransient
     @JsonIgnore
     @OneToMany(mappedBy = "owner")
     private Set<PetEntity> pets = new HashSet<>();

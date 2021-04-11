@@ -35,5 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.rememberMe()
                 .userDetailsService(userDetailsService);
+
+        // basic auth artik devrede
+        http.httpBasic();
     }
 }
